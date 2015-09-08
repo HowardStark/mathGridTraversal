@@ -1,5 +1,17 @@
 #!/bin/bash
 
+coinSolve() {
+    if [[ $# == 1 ]]
+    then
+        TOTAL=$(($1 + 1))
+        SUBTRACT=$1
+        TOTAL_F=$(factorial $TOTAL)
+        SUBTRACT_F=$(factorial $SUBTRACT)
+        ANSWER=$(echo "$TOTAL_F / $SUBTRACT_F" | bc -l)
+        echo $ANSWER
+    fi
+}
+
 gridSolve() {
     if [[ $# == 2 ]]
     then
@@ -39,13 +51,19 @@ factorial() {
     fi
 }
 
-if [[ $# -lt 2 ]]
+if [[ $# -lt 1 ]]
 then
     echo "Not enough arguments..."
+elif [[ $# == 1 ]]
+then
+    echo $(coinSolve $1)
 elif [[ $# == 2 ]]
+then
     echo $(squareSolve $1 $2)
 elif [[ $# == 3 ]]
+then
     echo $(cubeSolve $1 $2 $3)
 elif [[ $# -gt 3 ]]
+then
     echo "Too many arguments..."
 fi
